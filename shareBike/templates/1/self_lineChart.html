@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="self-lineChart" method="post">
+    {% csrf_token %}
+    <input type="text" name="file" placeholder="请输入您的数据集名称">
+    <input type="text" name="chart_name" placeholder="请输入您的图表">
+    <input type="submit" value="生成折线图">
+</form>
+<hr>
+    <div>
+        <span>请确保您的文件格式为以下格式</span>
+    </div>
+    <div>
+        <img src="../../static/images/e.JPG" alt="">
+    </div>
+</body>
+</html>

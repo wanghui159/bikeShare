@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+    body {
+        background-color: #eeeeee;
+    }
+
+    .content {
+        margin-top: 70px;
+        font-family: "JetBrains Mono";
+    }
+
+    .predict_input .title {
+        margin-top: 10px;
+        font-size: 23px;
+        margin-left: 10px;
+    }
+
+    .predict_line .title {
+        margin-top: 20px;
+        font-size: 25px;
+        margin-left: 20px;
+    }
+
+    .predict_input .form {
+        float: left;
+        width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        margin-left: 2%;
+        margin-top: 2%;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    .predict_line .form {
+        float: left;
+        width: 800px;
+        height: 500px;
+        border: 1px solid black;
+        margin-left: 3%;
+        margin-top: 2%;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+
+    .predict_input .table {
+        margin-top: 15%;
+        margin-left: 12%;
+    }
+
+    .predict_line .table {
+        margin-top: 10%;
+        margin-left: 12%;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike" class="cur">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content">
+    <div class="predict_input">
+
+        <div class="form">
+            <div class="title" style="text-align: center">预测美国西雅图某地区一天骑行量</div>
+            <div class="table">
+                <form method="post" action="predict_bike">
+                    {% csrf_token %}
+                    <table cellpadding="15" border="1" bordercolor="#d3d7d4" cellspacing="0">
+                        <tr>
+                            <td colspan="2">请输入预测那一天的信息</td>
+                        </tr>
+                        <tr>
+                            <td>请选择日期：</td>
+                            <td>
+                                <select name="year" id="year">
+                                    {% for key in year %}
+                                        <option value="{{ key }}">{{ key }}</option>
+                                    {% endfor %}
+                                </select>
+                                <select name="month" id="month">
+                                    {% for key in month %}
+                                        <option value="{{ key }}">{{ key }}</option>
+                                    {% endfor %}
+                                </select>
+                                <select name="day" id="day">
+                                    {% for key in day %}
+                                        <option value="{{ key }}">{{ key }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span id="msg_date" style="color: red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center"><input type="submit" value="提交" id="submit"
+                                                                              style="width:200px;height: 35px;background-color: #33a3dc;border:0px;">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <span style="color:red;">{{ msg }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="predict_line">
+        <div class="form">
+            <div class="iframe">
+                <iframe frameborder="0" width="800px" height="500px" src="http://127.0.0.1:8000/result"></iframe>
+            </div>
+            <div class="chart">
+                <iframe frameborder="0" width="800px" height="500px" src="http://127.0.0.1:8000/pred"></iframe>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+    let method = '{{ method }}'
+    if (method == 'get') {
+        $('.chart').show()
+        $('.iframe').hide()
+    }
+    if (method == 'post') {
+        $('.chart').hide()
+        $('.iframe').hide()
+        $('.iframe').fadeToggle(2000)
+    }
+    $('#submit').click(function () {
+        let year = $('#year option:checked').val()
+        let month = $('#month option:checked').val()
+        let day = $('#day option:checked').val()
+        let temp = $('#temp').val()
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            if (month == 2) {
+                if (day >= 30) {
+                    $('#msg_date').text('您选择的日期错误')
+                    msg = 1
+                }
+            }
+        } else {
+            if (month == 2) {
+                if (day >= 29) {
+                    $('#msg_date').text('您选择的日期错误')
+                    msg = 1
+                }
+            }
+        }
+        if (month == 1 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        } else {
+            if (day >= 31) {
+                $('#msg_date').text('您选择的日期错误')
+                msg = 1
+            }
+        }
+        if (msg == 1) {
+            return false
+        }
+        if (msg == 0) {
+            return true
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录/注册</title>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/footer.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/register.css">
+</head>
+<style>
+    body{
+        background-color: #cde6c7;
+    }
+    .content-nav{
+        margin-top: 60px;
+    }
+</style>
+<body>
+    <div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse" class="cur">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+    <div class="content-nav">
+        <div class="content-nav-left">
+            <img src="../static/images/b.jpeg" width="450" height="500">
+        </div>
+        <div class="content-nav-right">
+            <div class="form-right">
+                <div class="form-font">
+                    <span class="login-form">注册</span><br>
+                    <span class="register-form">已有账号，请点击右上角登录</span>
+                </div>
+                <div class="content-form">
+                    <form method="post" action="/register_form">
+                        {% csrf_token %}
+                        <input type="text" name="userName" placeholder="请输入用户名" style="font-size: 15px;width: 100px" value="{{ userName }}"><span style="color:red;font-size: 15px">{{ username_msg }}</span>
+                        <br>
+                        <hr style="width: 400px;">
+                        <input type="password" name="password" placeholder="请输入密码" style="font-size: 15px;width: 100px" value="{{ password }}"><span style="color:red;font-size: 15px">{{ password_msg }}</span>
+                        <br>
+                        <hr style="width: 400px;">
+                        <input type="password" name="confirm_password" placeholder="请再次输入密码" style="font-size: 15px;width: 150px" value="{{ confirm_password }}">
+                        <br>
+                        <hr style="width: 400px;">
+                        <input type="text" name="email" placeholder="请输入邮箱" style="font-size: 15px;width: 200px;" value="{{ email }}"><span style="color:red;font-size: 15px">{{ email_msg }}</span>
+                        <br>
+                        <hr style="width: 400px;">
+                        <input type="text" name="company" placeholder="请输入公司或学校名" style="font-size: 15px;width: 200px;" value="{{ company }}"><span style="color:red;font-size: 15px">{{ company_msg }}</span>
+                        <br>
+                        <hr style="width: 400px;"><br>
+                        <input type="submit" value="开始使用" style="width:150px;height: 35px;background-color: rgb(172, 162, 231);">
+                    </form>
+                </div>
+            </div>
+            
+        </div>     
+    </div>
+    <div class="footer-nav">
+        <span>CopyRight@copy2021</span>
+    </div>
+</body>
+</html>

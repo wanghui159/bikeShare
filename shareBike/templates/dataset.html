@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+    <link href="../static/css/dataset.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+    .content-nav{
+        margin-top: 50px;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset"  class="cur">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content-nav">
+    <div class="content-nav-table">
+        <span style="font-size: 19px"><b>上传数据集</b></span>
+        <div class="table">
+            <table border="0" cellpadding="10px">
+                <form action="upload" method="post" enctype="multipart/form-data" id="form">
+                    {% csrf_token %}
+                    <tr>
+                        <td>数据集名称</td>
+                        <td colspan="3"><input type="text" id="input-text-short" name="name" value="{{ name }}"
+                                               placeholder="数据集名称"><span id="dataset_name_msg" style="color: red"></span></td>
+                    </tr>
+                    <tr>
+                        <td>数据集描述</td>
+                        <td colspan="3"><textarea cols="40" rows="5" name="description"
+                                                  id="input-text-long">{{ description }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>数据集文件</td>
+                        <td colspan="2"><input type="file" name="file" id="input-file"><span id="dataset_file_msg" style="color: red"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><span style="color: red">{{ msg }}</span></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="上传" id="submit"></td>
+                        <td><input type="button" value="取消" id="cancel"></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<script src="jquery-3.6.0.min.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+    $("#form").submit(function(e){
+        msg = 0
+        if($('#input-text-short').val().length==0){
+            msg = 1
+            $('#dataset_name_msg').text('请输入数据集名称')
+        }
+        if($('#input-file').val().length==0){
+            msg = 1
+            $('#dataset_file_msg').text('请上传文件')
+        }
+        if(msg == 0){
+            return true
+        }
+        if(msg == 1){
+            return false
+        }
+    })
+    $('#cancel').click(function(){
+        $('#input-text-short').val("")
+        $('#input-text-long').val("")
+        $('#input-file').val("")
+    })
+</script>
+</body>
+</html>

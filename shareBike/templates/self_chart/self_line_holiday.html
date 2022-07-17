@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<style>
+    body {
+        font-family: "Icons20", sans-serif;
+        background-color: #eeeeee;
+    }
+
+    .content-top {
+        margin-top: 50px;
+    }
+
+    .title {
+        width: 100%;
+        border:1px solid #eeeeee;
+    }
+    .title_frame{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: white;
+        border-radius: 10px;
+        font-size: 25px;
+    }
+    table {
+        background-color: white;
+    }
+
+    img {
+        border-radius: 10px;
+    }
+
+    .font {
+        padding-bottom: 10px;
+    }
+
+    #table-select {
+        color: #696969;
+    }
+
+    #submit {
+        width: 270px; /* 宽度 */
+        height: 40px; /* 高度 */
+        border-width: 0px; /* 边框宽度 */
+        border-radius: 3px; /* 边框半径 */
+        background: #33a3dc; /* 背景颜色 */
+        cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+        outline: none; /* 不显示轮廓线 */
+        font-family: Microsoft YaHei; /* 设置字体 */
+        color: white; /* 字体颜色 */
+        font-size: 17px;
+        float: right;
+    }
+
+    #submit:hover {
+        background-color: #2585a6;
+    }
+
+    #table-select tr:nth-child(even) {
+        background: white;
+    }
+
+    #table-select tr:nth-child(odd) {
+        background: #D2E9FF;
+    }
+
+    #table-select tr th {
+        background: #94d6da;
+    }
+
+    #table-select tr td {
+        width: 420px;
+    }
+
+    .dataset {
+        width: 100%;
+    }
+
+    .dataset .frame_dataset {
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    .font {
+        width: 20px;
+        padding-top: 100px;
+        float: left;
+    }
+    .table{
+        margin-left: 50px;
+    }
+    .table_select_div{
+        width: 100%;
+    }
+    .table_select_frame{
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation" class="cur">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content-top">
+    <div class="title">
+        <div class="title_frame">双折线图</div>
+    </div>
+    <form action="holiday" method="post">
+        {% csrf_token %}
+    <div class="table_select_div">
+        <div class="table_select_frame">
+            <table id="table-select" border="1" bordercolor="#E0E0E0" cellpadding="5" cellspacing="0">
+                <tr id="table_head">
+                    <th><b>数据集名称</b></th>
+                    <th><b>数据集描述</b></th>
+                    <th><b>选择</b></th>
+                </tr>
+                {% for key,value in data.items %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                        <td><input type="radio" name="file" value="{{ key }}"></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3">
+                        <span style="color: red">{{ msg }}</span>
+                        <input type="hidden" name="chart_name" value="Geo-route">
+                        <input type="submit" value="生成双折线图" id="submit">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    </form>
+    <hr>
+</div>
+
+<div class="content">
+    <span>
+        请确保您的文件格式为以下格式：<br>
+        <span>例：</span>
+    </span>
+    <div>
+        <div class="dataset">
+            <div class="frame_dataset">
+                <div class="font">
+                    <span>数据集</span>
+                </div>
+                <div class="table">
+                <table id="table" border="1" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <td>日期</td>
+                        <td>男</td>
+                        <td>女</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/16</td>
+                        <td>25</td>
+                        <td>35</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/17</td>
+                        <td>234</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/18</td>
+                        <td>46</td>
+                        <td>57</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/19</td>
+                        <td>53</td>
+                        <td>68</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/20</td>
+                        <td>78</td>
+                        <td>85</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/21</td>
+                        <td>55</td>
+                        <td>31</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/22</td>
+                        <td>58</td>
+                        <td>44</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/23</td>
+                        <td>56</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/24</td>
+                        <td>57</td>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <td>2021/4/25</td>
+                        <td>75</td>
+                        <td>10</td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+
+        </div>
+        <div class="dataset">
+            <div class="frame_dataset">
+                <div class="font">
+                    <span>图表<br><br>双折线图</span>
+                </div>
+                <div class="table">
+                    <img src="../../static/images/holiday_line.png" width="500px">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+</script>
+</body>
+</html>

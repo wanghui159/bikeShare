@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+    body {
+        background-color: #eeeeee;
+    }
+
+    a {
+        text-decoration: none;
+        color: #555555;
+        font-size: 14px;
+    }
+
+    .bike {
+        width: 100%;
+    }
+
+    .content {
+        margin-top: 65px;
+    }
+
+    .chart_bike {
+        display: inline-block;
+        width: 72px;
+        background-color: white;
+        border-radius: 5px;
+        padding: 10px 20px 10px 20px;
+        border: 1px solid #d3d7d4;
+        margin-left: 45px;
+    }
+
+    #span {
+        font-family: "JetBrains Mono";
+        font-size: 15px;
+    }
+    .title {
+        margin-top: 16px;
+        font-family: 黑体;
+        font-size: 20px;
+        float: left;
+        width: 20px;
+    }
+    .chart{
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: white;
+        border-radius: 5px;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation" class="cur">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content">
+    <div class="bike">
+        <div class="chart">
+            <div class="title">
+                <span>骑行路线</span>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="route"><img src="../static/images/icon_chart/route.png"></a>
+                    <span id="span"><a href="route">迁移图</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bike">
+        <div class="chart">
+            <div class="title">
+                <span>热点区域</span>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="heat"><img src="../static/images/icon_chart/heat.png"></a>
+                    <span id="span"><a href="heat">热力图</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bike">
+        <div class="chart">
+            <div class="title">
+                <span>影响因素</span>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="season"><img src="../static/images/icon_chart/rose.png"></a>
+                    <span id="span"><a href="season">玫瑰图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="holiday"><img src="../static/images/icon_chart/line.png"></a>
+                    <span id="span"><a href="holiday">双折线图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="visibility"><img src="../static/images/icon_chart/bar.png"></a>
+                    <span id="span"><a href="visibility">柱状图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="month"><img src="../static/images/icon_chart/boxplot.png"></a>
+                    <span id="span"><a href="month">箱线图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="temp_speed"><img src="../static/images/icon_chart/kdeplot.png"></a>
+                    <span id="span"><a href="temp_speed">核密度图</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bike">
+        <div class="chart">
+            <div class="title">
+                <span>用户画像</span>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="gender"><img src="../static/images/icon_chart/pictorial_bar.png"></a>
+                    <span id="span"><a href="gender">象形柱图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="age"><img src="../static/images/icon_chart/line.png"></a>
+                    <span id="span"><a href="age">单折线图</a></span>
+                </div>
+            </div>
+            <div class="chart_bike">
+                <div style="text-align: center;">
+                    <a href="is_register"><img src="../static/images/icon_chart/pie.png"></a>
+                    <span id="span"><a href="is_register">饼图</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+
+</script>
+</body>
+</html>

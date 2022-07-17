@@ -1,0 +1,154 @@
+body {
+    /*background-color: #f3f3f3;*/
+}
+
+ul li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    color: #616161;
+}
+
+.header {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    font-size: 14px;
+    height: 8%;
+    border-bottom: 1px solid #A9A9A9;
+    background-color: white;
+    margin-left: -10px;
+}
+
+.header-left {
+    padding-left: 100px;
+    float: left;
+    width: 15%;
+}
+
+.header-logo {
+    margin-top: 10px;
+}
+
+.header-logo img {
+    height: 32px;
+}
+
+.header-right {
+    float: right;
+    width: 75%;
+}
+
+.left {
+    padding-top: 1px;
+    float: left;
+    padding-left: 80px;
+}
+
+.left ul {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.left ul li {
+    float: left;
+    padding-left: 30px;
+    list-style-type: none;
+}
+
+.left ul li a:hover {
+    color: #03A678;
+}
+
+.right {
+    float: right;
+    padding-right: 50px;
+}
+
+.right #before-login {
+    float: left;
+}
+
+.right #after-login {
+    padding-top: -10px;
+    font-size: 12px;
+    width: 180px;
+}
+
+.right #before-login ul {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.right #before-login ul li {
+    float: left;
+    padding-left: 30px;
+    list-style-type: none;
+}
+
+.right #after-login ul {
+    display: inline-block;
+    border: 1px #A9A9A9;
+}
+
+.right #after-login ul li {
+    padding-top: 10px;
+    list-style-type: none;
+}
+
+#userName {
+    margin-left: 49px;
+    margin-top: 19px;
+    width: 80px;
+}
+#userName a:hover {
+    color: #03A678;
+}
+
+#my {
+    display: none;
+    margin-top: 5px;
+}
+
+
+#my ul li a:hover {
+    color: #03A678;
+}
+
+#my ul li {
+    display: block;
+    background-color: white;
+
+}
+
+.top {
+    border-top: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 2px;
+}
+
+.con {
+    border-right: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.bottom {
+    border-right: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 2px;
+}
+.cur{
+    color: #03A678;
+}

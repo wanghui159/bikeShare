@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+    body {
+        background: url(../static/images/bg5.jpeg) no-repeat;
+        background-size: cover
+    }
+    .image img{
+        width:400px;
+
+    }
+    .content{
+        margin-top: 150px;
+    }
+    .left-top{
+        width: 400px;
+        height:260px;
+        float: left;
+        margin-left: 150px;
+    }
+    .left-top img{
+        transform: rotate(20deg); /* 标准语法 */
+    }
+    .right-top{
+        width: 400px;
+        float: right;
+        height:260px;
+        margin-right: 150px;
+    }
+    .right-top img{
+        transform: rotate(-10deg);
+    }
+    .left-bottom{
+        float: left;
+        height:260px;
+        margin-top: 20px;
+        margin-left: 200px;
+    }
+    .left-bottom img{
+        transform: rotate(-10deg);
+    }
+    .right-bottom{
+        float: right;
+        height:260px;
+        margin-top: 20px;
+        margin-right: 250px;
+    }
+    .right-bottom img{
+        transform: rotate(15deg);
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index" class="cur">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content">
+    <div class="left-top image">
+        <a href="history_data_analyse"><img src="../static/images/bg1.png"></a>
+    </div>
+    <div class="right-top image">
+        <a href="history_data_analyse"><img src="../static/images/bg2.png"></a>
+    </div>
+    <div class="left-bottom image">
+        <a href="influence"><img src="../static/images/bg3.png"></a>
+    </div>
+    <div class="right-bottom image">
+        <a href="user"><img src="../static/images/bg4.png"></a>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+{#<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>#}
+
+
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+</script>
+</body>
+</html>

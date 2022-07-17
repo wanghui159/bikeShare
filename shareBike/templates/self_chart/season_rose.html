@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="0ae1fbe58696466eb5d91dac8b73c0d3" class="chart-container" style="width:100%; height:600px;"></div>
+    <script>
+        var chart_0ae1fbe58696466eb5d91dac8b73c0d3 = echarts.init(
+            document.getElementById('0ae1fbe58696466eb5d91dac8b73c0d3'), 'white', {renderer: 'canvas'});
+        var option_0ae1fbe58696466eb5d91dac8b73c0d3 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "pie",
+            "clockwise": true,
+            "data": [
+                {
+                    "name": "\u5317\u4eac",
+                    "value": 200
+                },
+                {
+                    "name": "\u4e0a\u6d77",
+                    "value": 500
+                },
+                {
+                    "name": "\u5c71\u4e1c",
+                    "value": 100
+                },
+                {
+                    "name": "\u897f\u85cf",
+                    "value": 50
+                },
+                {
+                    "name": "\u6d59\u6c5f",
+                    "value": 700
+                }
+            ],
+            "radius": [
+                "30%",
+                "75%"
+            ],
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "roseType": "radius",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8,
+                "fontSize": 15,
+                "formatter": "{b}: {c} ({d}%)"
+            },
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "formatter": "{a} <br/>{b}: {c} ({d}%)",
+                "textStyle": {
+                    "fontSize": 14
+                },
+                "borderWidth": 0,
+                "padding": 5
+            },
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5317\u4eac",
+                "\u4e0a\u6d77",
+                "\u5c71\u4e1c",
+                "\u897f\u85cf",
+                "\u6d59\u6c5f"
+            ],
+            "selected": {},
+            "show": true,
+            "left": "right",
+            "orient": "vertical",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "axis",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "title": [
+        {
+            "text": "\u73ab\u7470\u56fe",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+        chart_0ae1fbe58696466eb5d91dac8b73c0d3.setOption(option_0ae1fbe58696466eb5d91dac8b73c0d3);
+            window.addEventListener('resize', function(){
+                chart_0ae1fbe58696466eb5d91dac8b73c0d3.resize();
+            })
+    </script>
+</body>
+</html>

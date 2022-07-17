@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可视化</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/history_data_analyse.css">
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse" class="cur">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content">
+    <div class="content-left">
+        <div class="menu">
+            <ul id="demo-list">
+                <li><a href="#" id="bike_route"><i class="icon_route"></i>骑行路线</a>
+                </li>
+                <li><a href="#" id="heat_area"><i class="icon_heat"></i>热点区域</a>
+                </li>
+                <li><a href="#" class="influence"><i class="icon_influence"></i>影响因素<i class="icon_drop_down_right"></i></a>
+                    <ul class="i_submenu" style="display: none">
+                        <li><a href="#" id="season"><i class="icon_date"></i>季节</a></li>
+                        <li><a href="#" id="month"><i class="icon_date"></i>月份</a></li>
+                        <li><a href="#" id="holiday"><i class="icon_date"></i>休息日与工作日</a></li>
+                        <li><a href="#" id="weather"><i class="icon_weather"></i>天气</a></li>
+                        <li><a href="#" id="visibility_miles"><i class="icon_weather"></i>可见度</a></li>
+                        <li><a href="#" id="temperature"><i class="icon_weather"></i>温度</a></li>
+                        <li><a href="#" id="humidity"><i class="icon_weather"></i>湿度</a></li>
+                        <li><a href="#" id="wind_speed"><i class="icon_weather"></i>风速</a></li>
+                        <li><a href="#" id="precipitation"><i class="icon_weather"></i>降水量</a></li>
+                        <li><a href="#" id="temp_speed"><i class="icon_weather"></i>温度和风速</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="user"><i class="icon_user"></i>用户画像<i class="icon_drop_down_right"></i></a>
+                    <ul class="u_submenu" style="display: none">
+                        <li><a href="#" id="gender"><i class="icon_gender"></i>性别</a></li>
+                        <li><a href="#" id="age"><i class="icon_age"></i>年龄</a></li>
+                        <li><a href="#" id="is_register"><i class="icon_is_register"></i>长短期会员</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-right">
+        <iframe id="iframeA" name="iframe" width="100%" height="570px" frameborder="0" scrolling="no"></iframe>
+    </div>
+</div>
+
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/js/jquery-1.11.2.min.js"></script>
+
+
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+
+    $(document).ready(function () {
+        $(".influence").click(function () {
+            $('.i_submenu').slideToggle(500)
+        });
+        $(".user").click(function () {
+            $(".u_submenu").slideToggle(500)
+        });
+    });
+
+    $(document).ready(function () {
+        let list = ['weather', 'bike_route', 'heat_area', 'season', 'month', 'holiday', 'visibility_miles', 'temperature', 'humidity', 'wind_speed', 'precipitation', 'temp_speed', 'gender', 'age', 'is_register']
+        for (let i in list) {
+            $("#" + list[i]).click(function () {
+                $('#iframeA').attr('src', 'http://127.0.0.1:8000/if_' + list[i]);
+            });
+        }
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        text-align: center;
+    }
+    .table{
+        padding: 50px 50px 50px 50px;
+        width: auto;
+        heighr:auto;
+        border: 1px solid #616161;
+        border-radius: 8px;
+    }
+    #table_css{
+        margin: 0 auto;
+    }
+</style>
+<body>
+<div class="table">
+    <table border="1" cellspacing="0" cellpadding="10" id="table_css">
+    <caption>数据显示</caption>
+    {% for line in test_data %}
+        <tr>
+            {% for i in line %}
+                <td>{{ i }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</div>
+</body>
+</html>

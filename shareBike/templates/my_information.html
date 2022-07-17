@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/navigation_bar.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<style>
+    .content {
+        height: auto;
+        margin-top: 6%;
+    }
+    .content-right{
+        margin-right: 10%;
+        margin-top: 8%;
+    }
+    .content-left input {
+        font-size: 15px;
+        outline: none;
+        border: 0;
+        color: cornflowerblue;
+        background-color: white;
+    }
+    .content-left input:hover{
+        color: #2585a6;
+    }
+    input{
+        outline: none;
+        border: 0;
+        border-radius: 10px;
+    }
+    .content-left {
+        float: left;
+        padding-left: 35px;
+        margin-left: 10%;
+
+    }
+    .content-right {
+        float: right;
+        padding-right: 35px;
+    }
+    table{
+        border-collapse:collapse
+    }
+
+    table tr th {
+        background: #c0c0c0;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="../static/images/bike-logo.png">
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="index" class="cur">首页</a>
+                </li>
+                <li>
+                    <a href="history_data_analyse">历史数据可视化分析</a>
+                </li>
+                <li>
+                    <a href="dataset">数据集</a>
+                </li>
+                <li>
+                    <a href="self_visualisation">用户数据可视化</a>
+                </li>
+                <li>
+                    <a href="predict_bike">预测骑行量</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="before-login">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+            <div id="after-login">
+                <div id="userName">
+                    <a href="#"><i class="icon_userName"></i><span>{{ userName }}</span><i
+                            class="icon_drop_down"></i></a>
+                </div>
+                <div id="my">
+                    <ul>
+                        <li class="top">
+                            <a href="/my"><i class="icon_homepage"></i>个人主页</a>
+                        </li>
+                        <li class="bottom">
+                            <a href="/logout"><i class="icon_logout"></i>退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="content">
+    <div class="content-left">
+        <table border="1" width="400" cellspacing="0" cellpadding="10" bordercolor="#E0E0E0">
+            <caption>{{ userName }}的数据集</caption>
+            <tr>
+                <th>数据集名称</th>
+                <th>查看数据集</th>
+            </tr>
+            {% for key,value in data.items %}
+                <tr>
+                    <form action="/my" method="post" >
+                        {% csrf_token %}
+                        <td>{{ key }}</td>
+                        <td>
+                            <input type="hidden" value="{{ key }}" name="name">
+                            <input type="submit" value="查看" id="input">
+                        </td>
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="content-right">
+        <h3>修改数据集</h3>
+        <div style="border: 1px solid #D3D3D3; padding: 20px 20px 20px 20px"
+        <form method="post" action="/set_up" id="form">
+            {% csrf_token %}
+            <input type="text" name="userName" readonly style="font-size: 15px;width: 100px"
+                   value="{{ userName }}"><span style="color:red;font-size: 15px">{{ username_msg }}</span>
+            <br>
+            <hr style="width: 400px;">
+            <input type="text" name="password" style="font-size: 15px;width: 100px"
+                   value="{{ password }}" id="password"><span style="color:red;font-size: 15px" id="password_msg"></span>
+            <br>
+            <hr style="width: 400px;">
+            <input type="text" name="email" placeholder="请输入邮箱" style="font-size: 15px;width: 200px;"
+                   value="{{ email }}" id="email"><span style="color:red;font-size: 15px" id="email_msg"></span>
+            <br>
+            <hr style="width: 400px;">
+            <input type="text" name="company" placeholder="请输入公司或学校名" style="font-size: 15px;width: 200px;"
+                   value="{{ company }}" id="company"><span style="color:red;font-size: 15px" id="company_msg"></span>
+            <br>
+            <hr style="width: 400px;">
+            <br>
+            <input type="submit" value="修改" style="width:150px;height: 35px;background-color: rgb(172, 162, 231);"><span style="color:red;font-size: 15px" id="msg"></span>
+        </form>
+    </div>
+
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+{#<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>#}
+
+
+<script>
+
+    userName = '{{ userName }}'
+    if (userName == '') {
+        $('#after-login').css('display', 'none')
+    } else {
+        $('#before-login').css('display', 'none')
+    }
+    $('#userName').click(function () {
+        $('#my').slideToggle(500)
+    })
+    password = '{{ password }}'
+    email = '{{ email }}'
+    company = '{{ company }}'
+$("#form").submit(function(e){
+    let password_su = $('#password').val()
+    let email_su = $('#email').val()
+    let company_su = $('#company').val()
+    msg = 0
+    if(password_su.length==0){
+        msg = 1
+        $('#password_msg').text('密码为空')
+    }
+    if(email_su.length==0){
+        msg = 1
+        $('#email_msg').text('邮箱为空')
+    }
+    if(company_su.length==0){
+        msg = 1
+        $('#company_msg').text('公司为空')
+    }
+    if(company_su==company && password_su==password && email_su==email){
+        $('#msg').text('您并未修改')
+        msg = 2
+    }
+    if(msg==1){
+        alert("修改不成功")
+        return false
+    }
+    if(msg==2){
+
+        $('#msg').text('您并未修改个人信息')
+        alert("修改不成功")
+        return false
+    }
+    if(msg==0){
+        alert("修改成功")
+        return true
+    }
+});
+
+</script>
+</body>
+</html>
